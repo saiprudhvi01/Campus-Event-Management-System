@@ -3,6 +3,7 @@ from models import db, Club, Student, Event, Registration
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import re
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
@@ -464,4 +465,5 @@ def get_fallback_response():
 
 if __name__ == '__main__':
     init_database()
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
